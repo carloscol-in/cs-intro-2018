@@ -32,6 +32,28 @@ namespace Etapa1
                 }
             };
 
+            school.Courses.Add( new Course() { Name = "Database Design 101", Time = CourseTimeTypes.Evening } );
+            school.Courses.Add( new Course() { Name = "Database Design 201", Time = CourseTimeTypes.Night } );
+
+            var another_collection = new List<Course>(){
+                new Course() {
+                    Name = "Frontend Development 101",
+                    Time = CourseTimeTypes.Morning
+                },
+                new Course() {
+                    Name = "Frontend Development 201",
+                    Time = CourseTimeTypes.Evening
+                },
+                new Course() {
+                    Name = "Frontend Development 301",
+                    Time = CourseTimeTypes.Night
+                }
+            };
+
+            school.Courses.AddRange(another_collection);
+            
+            school.Courses.RemoveAll((cur) => cur.Name == "Software Development 301");
+
             PrintSchoolCourses(school);
         }
 
