@@ -1,5 +1,6 @@
 ﻿using System;
 using CoreSchool.Entities;
+using System.Collections.Generic;
 using static System.Console; // Allow us to use ony WriteLine(), for example, instead of Console.WriteLine()
 
 namespace Etapa1
@@ -19,7 +20,7 @@ namespace Etapa1
             // school.City = "Bogota";
             // school.SchoolType = SchoolTypes.Primaria;
 
-            school.Courses = new Course[] {
+            school.Courses = new List<Course>(){
                 new Course() {
                     Name = "Software Development 101"
                 },
@@ -30,10 +31,6 @@ namespace Etapa1
                     Name = "Software Development 301"
                 }
             };
-
-            // Console.WriteLine(school);
-            school.Courses = null;
-            school = null;
 
             PrintSchoolCourses(school);
         }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace CoreSchool.Entities
 {
 
@@ -17,7 +19,7 @@ namespace CoreSchool.Entities
         public string Country { get; set; }
         public string City { get; set; }
         public SchoolTypes SchoolType { get; set; }
-        public Course[] Courses { get; set; }
+        public List<Course> Courses { get; set; }
 
         // constructor
         public School(string name, int foundation_year) => (Name, FoundationYear) = (name, foundation_year);
