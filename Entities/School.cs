@@ -3,10 +3,11 @@ using System.Collections.Generic;
 namespace CoreSchool.Entities
 {
 
-    class School {
+    public class School : BaseEntity
+    {
 
         string name;
-        public string Name {
+        new public string Name {
             get {
                 return name;
             }

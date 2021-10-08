@@ -1,60 +1,21 @@
 ﻿using System;
 using CoreSchool.Entities;
+using CoreSchool.Util;
 using System.Collections.Generic;
 using static System.Console; // Allow us to use ony WriteLine(), for example, instead of Console.WriteLine()
 
-namespace Etapa1
+namespace CoreSchool
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var school = new School(
-                name: "platzi academy",
-                foundation_year: 2000,
-                school_type: SchoolTypes.Primaria,
-                country: "Colombia",
-                city: "Bogota"
-            );
-            // school.Country = "Colombia";
-            // school.City = "Bogota";
-            // school.SchoolType = SchoolTypes.Primaria;
+            var engine = new SchoolEngine();
+            engine.Initialize();
 
-            school.Courses = new List<Course>(){
-                new Course() {
-                    Name = "Software Development 101"
-                },
-                new Course() {
-                    Name = "Software Development 201"
-                },
-                new Course() {
-                    Name = "Software Development 301"
-                }
-            };
+            Printer.WriteTitle("Hello, World!");
 
-            school.Courses.Add( new Course() { Name = "Database Design 101", Time = CourseTimeTypes.Evening } );
-            school.Courses.Add( new Course() { Name = "Database Design 201", Time = CourseTimeTypes.Night } );
-
-            var another_collection = new List<Course>(){
-                new Course() {
-                    Name = "Frontend Development 101",
-                    Time = CourseTimeTypes.Morning
-                },
-                new Course() {
-                    Name = "Frontend Development 201",
-                    Time = CourseTimeTypes.Evening
-                },
-                new Course() {
-                    Name = "Frontend Development 301",
-                    Time = CourseTimeTypes.Night
-                }
-            };
-
-            school.Courses.AddRange(another_collection);
-            
-            school.Courses.RemoveAll((cur) => cur.Name == "Software Development 301");
-
-            PrintSchoolCourses(school);
+            PrintSchoolCourses(engine.School);
         }
 
         private static void PrintSchoolCourses(School school)
@@ -65,42 +26,6 @@ namespace Etapa1
             {
                 WriteLine(course);
             }
-        }
-
-        private static void PrintCoursesForEach(Course[] courses_array)
-        {
-            foreach (var course in courses_array)
-            {
-                Console.WriteLine(course);
-            }
-        }
-
-        private static void PrintCoursesFor(Course[] courses_array)
-        {
-            for (int i = 0; i < courses_array.Length; i++)
-            {
-                Console.WriteLine(courses_array[i]);
-            }
-        }
-
-        private static void PrintCoursesWhile(Course[] courses_array)
-        {
-            int count = 0;
-            while (count < courses_array.Length)
-            {
-                Console.WriteLine(courses_array[count]);
-                count++;
-            }
-        }
-
-        private static void PrintCoursesDoWhile(Course[] courses_array)
-        {
-            int count = 0;
-            do
-            {
-                Console.WriteLine(courses_array[count]);
-                // count++;
-            } while (++count < courses_array.Length);
         }
     }
 }
