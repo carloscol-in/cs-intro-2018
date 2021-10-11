@@ -13,6 +13,7 @@ namespace CoreSchool.Entities
         public Course()
         {
             // code
+            Subjects = new List<Subject>() {};
         }
 
         public override string ToString()

@@ -23,14 +23,8 @@ namespace CoreSchool
             );
 
             LoadCourses();
-            LoadStudents();
             LoadSubjects();
             LoadEvaluations();
-        }
-
-        private void LoadEvaluations()
-        {
-            throw new NotImplementedException();
         }
 
         private void LoadSubjects()
@@ -44,24 +38,59 @@ namespace CoreSchool
                     new Subject{Name="Arts"},
                     new Subject{Name="Biology"},
                 };
+
                 course.Subjects.AddRange(subject_list);
             }
         }
 
-        private void LoadStudents()
+        private void LoadEvaluations()
+        {
+            Random rnd = new Random();
+            float grade;
+            foreach (Course course in School.Courses)
+            {
+                foreach (var student in course.Students)
+                {
+                    foreach (var subject in course.Subjects)
+                    {
+                        List<Evaluation> evaluations = new List<Evaluation>();
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            grade = (float)rnd.Next(0, 50) / 10;
+                            Evaluation eval = new Evaluation {
+                                Subject = subject,
+                                Student = student,
+                                Grade = grade
+                            };
+                            evaluations.Add(eval);
+                        }
+
+                        subject.Evaluations = evaluations;
+                    }
+                }
+            }
+        }
+
+        private List<Student> LoadStudents(int quantity)
         {
             string[] name1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás" };
-            string[] name2 = { "Freddy", "Anabel", "Rick", "Murty", "Silvana", "Diomedes", "Nicomedes", "Teodoro" };
             string[] surname1 = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
+            string[] name2 = { "Freddy", "Anabel", "Rick", "Murty", "Silvana", "Diomedes", "Nicomedes", "Teodoro" };
 
             var students_list = from n1 in name1
                                 from n2 in name2
                                 from s1 in surname1
-                                select new Student{ Name = $"{name1} {name2} {surname1}" };
+                                select new Student{ Name = $"{n1} {n2} {s1}" };
+
+            return students_list.OrderBy( (st) => st.UniqueId).Take(quantity).ToList();
         }
 
         private void LoadCourses()
         {
+            int random_quantity;
+            Random rnd = new Random();
+
             School.Courses = new List<Course>(){
                 new Course() {
                     Name = "Software Development 101"
@@ -85,6 +114,13 @@ namespace CoreSchool
                     Time = CourseTimeTypes.Night
                 }
             };
+
+            foreach (var course in School.Courses)
+            {
+                random_quantity = rnd.Next(5, 20);
+                List<Student> students = LoadStudents( random_quantity );
+                course.Students = students;
+            }
         }
     }
 }
